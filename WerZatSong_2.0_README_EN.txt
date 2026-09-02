@@ -1,0 +1,371 @@
+WerZatSong 2.0
+================
+
+1. What is WerZatSong?
+----------------------
+WerZatSong is a local music identification program based on audio fingerprinting.
+
+The program uses Audfprint together with a custom graphical interface. Music identification is performed locally on the user's computer using previously created fingerprint databases.
+
+WerZatSong can be used to identify large collections of audio files and search them against one or multiple fingerprint databases.
+
+
+2. Getting Started
+------------------
+Run:
+
+    WerZatSong.exe
+
+You do not need to install separately:
+- Python
+- Node.js
+- FFmpeg
+- FFprobe
+
+All required components are included in the WerZatSong package.
+
+Do not move or delete individual components of the program folder.
+
+If you want to move WerZatSong to another drive or computer, copy the entire WerZatSong folder.
+
+
+3. Folder Structure
+-------------------
+The package contains:
+
+    WerZatSong/
+    +-- WerZatSong.exe
+    +-- WerZatSong.ico
+    +-- werzatsong.js
+    +-- .env.example
+    +-- input/
+    +-- database/
+    +-- logs/
+    +-- runtime/
+    |   +-- python/
+    |   +-- node/
+    |   +-- ffmpeg/
+    +-- libs/
+    +-- scripts/
+    +-- utils/
+    +-- resources/
+    +-- node_modules/
+
+input
+-----
+Place audio files here when they are going to be processed by Search.
+
+database
+--------
+Contains fingerprint databases. Databases may contain .pklz files.
+Do not delete .pklz files if you want to keep the database.
+
+logs
+----
+Contains program logs and information about performed operations.
+
+runtime
+-------
+Contains the built-in Python, Node.js, FFmpeg and FFprobe components required by WerZatSong.
+Do not delete this folder.
+
+libs, scripts, utils, resources, node_modules
+---------------------------------------------
+These contain program components and supporting files.
+Do not delete or move individual files from these folders.
+
+
+4. Fingerprint Creator
+----------------------
+Fingerprint Creator is used to create fingerprint databases from music files.
+
+    Music files
+         |
+         v
+    Fingerprint Creator
+         |
+         v
+    Fingerprinting
+         |
+         v
+    .pklz database
+         |
+         v
+    database/
+
+The created database can then be used by Search.
+
+When creating large databases, fingerprinting may require significant CPU resources and time.
+
+
+5. Search
+---------
+Search is used to identify audio files using previously created fingerprint databases.
+
+Place the files you want to search in:
+
+    input/
+
+Then start Search and select the appropriate options.
+
+The program processes the audio and compares its fingerprints against the selected databases.
+
+
+6. Database Selection
+---------------------
+All Databases
+-------------
+Search all available databases.
+
+Custom Selection
+----------------
+Select only specific databases.
+
+Custom Selection includes:
+- Select All
+- Deselect All
+
+Custom Selection is useful when you have many databases and do not want to search all of them.
+
+
+7. Merge
+--------
+Merge allows you to combine multiple fingerprint databases into a single database.
+
+This is useful when you have several smaller databases and want to create one database containing their combined contents.
+
+Example:
+
+    Database A
+    Database B
+    Database C
+         |
+         v
+       Merge
+         |
+         v
+    Combined Database
+
+The original databases can be kept separately, while the merged database can be used as a new search source.
+
+Important:
+Avoid creating unnecessarily large merged databases. As a general guideline, keeping a database around 20,000 tracks or fewer is recommended.
+
+
+8. Multi Source
+---------------
+Multi Source allows multiple databases/sources to be used during a single search.
+
+This is useful when your fingerprint collection is divided into multiple databases.
+
+Instead of performing separate searches against each database, you can select multiple sources and search them together.
+
+
+9. Speed Correction
+-------------------
+Speed Correction allows the program to search for tracks at different playback speeds.
+
+Range:
+
+    -10% to +10%
+
+Step:
+
+    0.5%
+
+Each speed correction value can be enabled or disabled independently.
+
+Speed correction is performed on the fly, without creating and permanently storing separate copies of every modified audio file.
+
+Multiple speed correction values can therefore be used during the same search.
+
+
+10. STOP
+--------
+The STOP button can be used to stop an active search.
+
+When Search is stopped, the current search process is interrupted.
+
+Important:
+When Search is manually stopped, temporary audio files may remain in the temporary folder.
+
+These files are not part of the fingerprint database and can be safely deleted manually.
+
+This does not affect the .pklz databases or future searches.
+
+
+11. Precomputed
+---------------
+The precomputed folder contains precomputed fingerprint data used during Search.
+
+These files are managed by the program and may be replaced or regenerated during subsequent searches.
+
+Do not manually delete the contents unless you know exactly what you are removing.
+
+
+12. Results and Logs
+--------------------
+Program information and logs can be found in:
+
+    logs/
+
+Logs can be useful for:
+- checking the Search process,
+- diagnosing problems,
+- checking errors,
+- verifying that files were processed correctly,
+- reviewing final identification results.
+
+The final logs should always be checked when evaluating Search results.
+
+
+13. Requirements
+----------------
+WerZatSong includes its own required runtime components:
+
+    Python
+    Node.js
+    FFmpeg
+    FFprobe
+
+Therefore, the user does not need to install them separately.
+
+A sufficiently powerful computer and enough free disk space are recommended, especially when creating large fingerprint databases.
+
+
+14. Important Rules
+-------------------
+Do not delete:
+
+    runtime/
+    libs/
+    scripts/
+    utils/
+    resources/
+    node_modules/
+
+Do not delete fingerprint databases:
+
+    database/*.pklz
+
+if you want to keep them.
+
+Do not move individual program components.
+
+When making a backup or moving WerZatSong to another computer:
+copy the entire WerZatSong folder.
+
+
+15. Troubleshooting
+-------------------
+The program does not start
+--------------------------
+Make sure that the entire WerZatSong folder has been copied.
+
+Do not copy only:
+
+    WerZatSong.exe
+
+The program requires the included runtime and supporting files.
+
+Search does not find any tracks
+-------------------------------
+Check:
+- whether the fingerprint database is available,
+- whether the correct database was selected,
+- whether the audio files are valid,
+- whether the appropriate search options are being used,
+- whether Speed Correction should be enabled.
+
+Temporary files remain after STOP
+---------------------------------
+This can happen when Search is manually stopped.
+
+Temporary audio files can be safely deleted manually.
+
+Do not delete .pklz fingerprint databases.
+
+
+16. Tips
+--------
+Long audio files
+----------------
+When searching long audio files, the Trim Middle 45 option is recommended.
+
+It can significantly reduce search time because the program analyzes only the middle 45 seconds of the track instead of processing the entire file.
+
+Short-track / preview databases
+--------------------------------
+When using a database made from short tracks or previews, First 75 sec can be useful.
+
+Trim Middle 45 and First 75 sec can also be enabled together when appropriate.
+
+Computer usage
+--------------
+When creating fingerprint databases or performing searches, it is recommended to avoid heavily loading the computer with other demanding applications.
+
+This can improve performance and reduce processing time.
+
+Number of threads
+-----------------
+You can try increasing the number of threads to speed up processing.
+
+However, if you encounter a Memory Error, reduce the number of threads.
+
+If you need to use the computer for other tasks while WerZatSong is running, it is also recommended to reduce the number of threads. This may result in a longer processing time.
+
+Speed Correction
+----------------
+Speed Correction can be extremely important.
+
+Even a difference of 0.5% can sometimes make a major difference in whether the correct ID is found.
+
+If a track is not identified using one speed value, try other Speed Correction values.
+
+False positives
+---------------
+Not every result marked as Success is necessarily a correct identification.
+
+False positives can occur and are normal in audio fingerprinting.
+
+Always analyze the final logs and verify the identified ID before treating a result as confirmed.
+
+Database size
+-------------
+It is recommended to avoid creating very large individual databases.
+
+As a general guideline, try to keep a single database to around 20,000 tracks or fewer.
+
+Larger databases can lead to a greater loss of matching quality due to limitations related to the number of stored hashes.
+
+If you have a collection larger than approximately 20,000 tracks, consider splitting it into several smaller databases and using Custom Selection or Multi Source.
+
+
+17. WerZatSong 2.0 Package
+--------------------------
+The complete package includes:
+
+    WerZatSong.exe
+    Python runtime
+    Node.js runtime
+    FFmpeg
+    FFprobe
+    Audfprint
+    Node modules
+    Fingerprinting libraries
+    Search / Creator scripts
+    Database support
+    Input folder
+    Logs
+    Resources
+
+The complete prepared package is approximately 769 MB.
+
+
+Final Note
+----------
+WerZatSong is designed to work as a self-contained local application.
+
+For reliable operation, keep the complete folder structure intact and avoid deleting or moving individual components.
+
+WerZatSong 2.0 - local audio fingerprinting and identification.

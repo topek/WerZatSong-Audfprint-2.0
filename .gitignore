@@ -1,0 +1,13 @@
+# Folders
+**/__pycache__/
+database/
+input/
+logs/
+node_modules/
+precomputed/
+processed/
+temp/
+
+# Files
+.env
+package-lock.json
